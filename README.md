@@ -12,6 +12,9 @@
 ### The code :
 [code](https://github.com/Sukina12/resty)
 
+### Pull Request:
+[pullRequest](https://github.com/Sukina12/resty/pull/1)
+
 
 ### To Run App:
   * npm start
