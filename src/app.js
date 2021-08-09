@@ -20,14 +20,9 @@ class App extends React.Component {
   callApi = (requestParams, inputData) => {
     // mock output
     const data = {
-      Headers: {
-        "cache-control": 'string no-cache'
-      },
-      count: 2,
-      results:[
-        { name: 'fake thing 1', url: 'http://fakethings.com/1' },
-        { name: 'fake thing 2', url: 'http://fakethings.com/2' },
-      ]
+      Headers: requestParams.headers,
+      count:requestParams.data.count ,
+      results:requestParams.data.results,
 
     };
     this.setState({data,requestParams});
@@ -35,10 +30,10 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header/>
+        <Header />
         {/* <div>Request Method: {this.state.requestParams.method}</div>
         <div>URL: {this.state.requestParams.url}</div> */}
-        <Form  prompt="Get Star Wars People" handleApiCall={this.callApi} />
+        <Form data-testid="myform" handleApiCall={this.callApi} />
         <Results data={this.state.data} />
         <Footer />
       </React.Fragment>

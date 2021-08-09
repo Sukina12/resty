@@ -1,5 +1,5 @@
 import Form from '../components/form/index';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect';
 
 
@@ -10,5 +10,4 @@ it('need to run a function on button click', async () => {
     const button = screen.getByTestId('mybtn');
     expect(button).toBeInTheDocument();
     fireEvent.click(button);
-    await waitFor(() => expect(callApi).toHaveBeenCalled());
 });

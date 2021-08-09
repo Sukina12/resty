@@ -19,7 +19,4 @@ it('Should render star wars list', () => {
 
     expect(items).toHaveTextContent('{ "Headers": { "cache-control": "string no-cache" }, "count": 2, "results": [ { "name": "fake thing 1", "url": "http://fakethings.com/1" }, { "name": "fake thing 2", "url": "http://fakethings.com/2" } ] }');
 
-
-
-
 });
