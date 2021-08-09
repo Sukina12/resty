@@ -1,11 +1,14 @@
-$backgroundColor:rgba(26, 116, 93, 0.938);
+$backgroundColor:rgba(30, 131, 106, 0.938);
 body{
     header {
-    background: $backgroundColor;
-    border-top: 1px solid #eee;
-    padding: 1em 3em;
-    margin: 0;
-    color:white !important;
-    text-align: center;
+      background: $backgroundColor;
+      height: 75px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
+      font-weight: 600;
+      color: #f7f7f3;
+      border-bottom: rgb(110, 109, 109) 1px solid;
   }
 }
