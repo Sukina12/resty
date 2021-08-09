@@ -15,6 +15,9 @@
 ### Pull Request:
 [pullRequest](https://github.com/Sukina12/resty/pull/1)
 
+### Deployment:
+[MyURL](https://resty-sukina.netlify.app/)
+
 
 ### To Run App:
   * npm start
