@@ -26,9 +26,5 @@
 ### Test:
   * npm test
 
-
-
-
-
 ### UML :
 ![UML](UML26.PNG)

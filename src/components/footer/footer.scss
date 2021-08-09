@@ -1,4 +1,4 @@
-$backgroundColor:  rgba(26, 116, 93, 0.938);
+$backgroundColor:  rgba(30, 131, 106, 0.938);
 body{
     footer {
     background: $backgroundColor;
@@ -7,5 +7,10 @@ body{
     margin: 0;
     color:white !important;
     text-align: center;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
   }
 }
