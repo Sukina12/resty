@@ -17,7 +17,8 @@
 ### Pull Request:
 [pullRequest](https://github.com/Sukina12/resty/pull/1)
 
-[pullrequest2](https://github.com/Sukina12/resty/pull/2)
+#### Lab27:
+[pullrequest2](https://github.com/Sukina12/resty/pull/3)
 
 ### Deployment:
 [MyURL](https://resty-sukina.netlify.app/)
