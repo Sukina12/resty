@@ -9,7 +9,7 @@
 ### Test Report:
 [Action test](https://github.com/Sukina12/resty/actions)
 
-![test1](testLab27.PNG)
+![test1](test27lab.PNG)
 
 ### The code :
 [code](https://github.com/Sukina12/resty)
