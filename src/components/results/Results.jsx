@@ -7,14 +7,21 @@ function Results (props){
   console.log('resultData',props.data);
 
   return (
-    <section data-testid="result"  >
+    <div data-testid="result"  >
       { props.data &&
-       <JSONPretty data ={props.data} ></JSONPretty>
+      <>
+       "count : "
+       <JSONPretty data ={props.data.count} />
+       "headers : "
+       <JSONPretty data ={props.data.headers}/> 
+       "results : "
+       <JSONPretty data ={props.data.results} />
+       </>
       }
       
      
 
-    </section>
+    </div>
   );
 
 }
