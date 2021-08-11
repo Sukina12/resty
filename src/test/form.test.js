@@ -10,5 +10,5 @@ it('need to run a function on button click', async () => {
     const button = screen.getByTestId('mybtn');
     expect(button).toBeInTheDocument();
     fireEvent.click(button);
-    // await waitFor(() => expect(handleApiCall).toHaveBeenCalled());
+    await waitFor(() => expect(handleApiCall).toHaveBeenCalled());
 });
