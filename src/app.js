@@ -8,33 +8,47 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Form from './components/form/Form';
 import Results from './components/results/Results';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { BeatLoader } from 'react-spinners';
 
-function App() {
-  const [data, setData] = useState(null);
-  const [requestParams, setRequestParams] = useState({});
-  const [load, setLoad] = useState(false);
-  const [status, setStatus] = useState(false);
-  function callApi(formData, responseData)  {
-    setData(responseData);
-    setRequestParams(formData);
+class App extends React.Component {
+  constructor (props){
+    super (props);
+    this.state = {
+      data:null,
+      requestParams:{},
+      load:false,
+    }
+  }
+ 
+  callApi=(formData,inputText ,responseData)=>  {
+    console.log('responseData',responseData);
+    console.log('formData',formData);
+    this.setState ({
+      data:responseData,
+      requestParams:formData,
+    })
+    console.log('data after set',this.state.data);
   }
 
-  function handleLoad(load) {
-    setLoad(load);
+   handleLoad(load) {
+    this.setState ({
+      load:load,
+    })
   }
+  render (){
 
-  return (
-    <React.Fragment>
-      <Header />
-      <div>Request Method: {requestParams.method}</div>
-        <div>URL: {requestParams.url}</div>
-      <Form handleLoad={handleLoad} handleApiCall={callApi} />
-      {load ? <BeatLoader load/> : <Results data ={data} />}
-      <Footer />
-    </React.Fragment>
-  );
+    return (
+      <React.Fragment>
+        <Header />
+        <div>Request Method: {this.state.requestParams.method}</div>
+          <div>URL: {this.state.requestParams.url}</div>
+        <Form handleLoad={this.handleLoad} handleApiCall={this.callApi} />
+        {this.state.load ? <BeatLoader load /> :  <Results data ={this.state.data} />}
+        <Footer />
+      </React.Fragment>
+    );
+  }
 
 }
 

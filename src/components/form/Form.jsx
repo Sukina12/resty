@@ -1,88 +1,96 @@
 import React from "react";
 import { useState } from "react";
+import axios from 'axios';
 import "./form.scss";
 
 function Form(props) {
-  const [method, setMethod] = useState("GET");
-  const [inputData, setInputData] = useState({});
+  const [method, setMethod] = useState('get');
+  const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
+  const [showText, setShowText] = useState(false);
+  const [inputText, setInputText] = useState({});
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      props.handleLoad(true);
-      const response = await fetch(`${e.target.url.value}`);
-      console.log('response',response);
-      const data = await response.json();
+      console.log('input', inputText);
+      const  response= await axios({
+        method: method,
+        url: url,
+      });
+      // const data = await raw.json();
       const formData = {
         method: method,
-        url: e.target.url.value,
+        url: url,
       };
-      props.handleLoad(false);
-      props.handleApiCall(formData, data);
+      console.log('Data', response);
+      console.log('formData', formData);
+      console.log('url', url);
+      props.handleApiCall(formData,inputText ,response.data);
+      setShowText(false)
     } catch (e) {
       console.error(e);
     }
   }
-  function handleInputData(e){
-    setInputData(e.target.value);
+  function handeleText(e) {
+    setShowText(true);
+    setMethod(e.target.id);
+  
+  }
+  function handeleInputText(e) {
+    setInputText(e.target.value);
+  }
+  function handelMethod(e) {
+    setMethod(e.target.id);
+  
   }
 
-  if (method === "GET" || method === "DELETE") {
+  if (method === 'get' || method === 'delete' ){
+
     return (
       <>
         <form onSubmit={handleSubmit}>
-          <label>
+          <label >
             <span>URL: </span>
-            <input name="url" type="text" />
+            <input name='link' type='URL' onChange={e => setUrl(e.target.value)} />
           </label>
           <label className="methods">
-            <span id="get" onClick={() => setMethod("GET")}>
-              GET
-            </span>
-            <span id="post" onClick={() => setMethod("POST")}>
-              POST
-            </span>
-            <span id="put" onClick={() => setMethod("PUT")}>
-              PUT
-            </span>
-            <span id="delete" onClick={() => setMethod("DELETE")}>
-              DELETE
-            </span>
-            <button type="submit" data-testid="mybtn">
-              GO!
-            </button>
+          <input type="radio" name="btn" id="get" onClick={handelMethod} />
+          <label>GET</label> &nbsp; &nbsp;
+          <input type="radio" name="btn" id="post" onClick={handeleText} />
+          <label>POST</label> &nbsp; &nbsp;
+          <input type="radio" name="btn" id="put" onClick={handeleText} />
+          <label>PUT</label> &nbsp; &nbsp;
+          <input type="radio" name="btn" id="delete" onClick={handelMethod} />
+          <label>DELETE</label> &nbsp; &nbsp;
+          
           </label>
+            <button type="submit" data-testid="mybtn">GO!</button>
+         
         </form>
       </>
     );
   }
-  if (method === "POST" || method === "PUT") {
+  if (method === 'post' || method === 'put' ){
+
     return (
       <>
-      <h3 style={{ color: 'red', margin: 'auto' }}>{method} is under construction</h3>;
-
         <form onSubmit={handleSubmit}>
-          <label>
+          <label >
             <span>URL: </span>
-            <input name="url" type="text" />
+            <input name='link' type='URL' onChange={e => setUrl(e.target.value)} />
           </label>
           <label className="methods">
-            <span id="get" onClick={() => setMethod("GET")}>
-              GET
-            </span>
-            <span id="post" onClick={() => setMethod("POST")}>
-              POST
-            </span>
-            <span id="put" onClick={() => setMethod("PUT")}>
-              PUT
-            </span>
-            <span id="delete" onClick={() => setMethod("DELETE")}>
-              DELETE
-            </span>
-          </label>
-        <textarea onChange={handleInputData} />
-            <button type="submit" data-testid="mybtn">
-              GO!
-            </button>
+          <input type="radio" name="btn" id="get" onClick={handelMethod} />
+          <label>GET</label> &nbsp; &nbsp;
+          <input type="radio" name="btn" id="post" onClick={handeleText} />
+          <label>POST</label> &nbsp; &nbsp;
+          <input type="radio" name="btn" id="put" onClick={handeleText} />
+          <label>PUT</label> &nbsp; &nbsp;
+          <input type="radio" name="btn" id="delete" onClick={handelMethod} />
+          <label>DELETE</label> &nbsp; &nbsp;
+         </label>
+            <button type="submit" data-testid="mybtn">GO!</button>
+          {showText &&
+            <textarea id="w3review" name="w3review" rows="10" cols="50" onChange={handeleInputText} />}
         </form>
       </>
     );
