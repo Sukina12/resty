@@ -20,6 +20,9 @@
 #### Lab27:
 [pullrequest2](https://github.com/Sukina12/resty/pull/4)
 
+#### Lab28:
+[pullRequest3](https://github.com/Sukina12/resty/pull/5)
+
 ### Deployment:
 [MyURL](https://react-app-sukina.netlify.app/)
 
