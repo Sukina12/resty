@@ -18,7 +18,7 @@ it('Should render star wars list', () => {
     render(<Results data={data} />);
     const items = screen.getByTestId('result');
 
-    expect(items).toHaveTextContent('"Headers : ""Count : "2"Results : "[ { "name": "fake thing 1", "url": "http://fakethings.com/1" }, { "name": "fake thing 2", "url": "http://fakethings.com/2" } ]');
+    expect(items).toHaveTextContent( '"Headers": { "cache-control": "string no-cache" }, "count": 2, "results": [ { "name": "fake thing 1", "url": "http://fakethings.com/1" }, { "name": "fake thing 2", "url": "http://fakethings.com/2" } ]');
 
 });
 
@@ -26,6 +26,6 @@ test('renders null for results before subitting Url', () => {
     render(<Results />);
     const resultsPreElement = screen.getByTestId('result');
     expect(resultsPreElement).toBeInTheDocument();
-    expect(resultsPreElement).toContainHTML('<div data-testid="result">');
+    expect(resultsPreElement).toContainHTML('<section data-testid="result">');
     expect(resultsPreElement).toHaveTextContent('');
   });

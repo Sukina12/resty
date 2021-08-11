@@ -1,29 +1,20 @@
 import React from 'react';
 import './results.scss';
 import JSONPretty from 'react-json-pretty';
+import 'react-json-pretty/themes/monikai.css';
 
 function Results (props){
-  console.log(props);
+  console.log('resultData',props.data);
 
   return (
-    // <section >
-    //   <pre data-testid="result">{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre>
-
-    // </section>
-    <div data-testid="result" >
-      {props.data &&
-      <>
-      "Headers : "
-      <JSONPretty data ={props.data.headers} />
-
-      "Count : "
-      <JSONPretty data ={props.data.count} />
-
-      "Results : "
-      <JSONPretty data ={props.data.results} />
-      </>
+    <section data-testid="result"  >
+      { props.data &&
+       <JSONPretty data ={props.data} ></JSONPretty>
       }
-    </div>
+      
+     
+
+    </section>
   );
 
 }
