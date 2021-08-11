@@ -17,7 +17,7 @@ it('need to run a function on button click', async () => {
 
 it('render result after submit the form', async () => {
     const data = {
-        Headers: {
+        headers: {
             "cache-control": 'string no-cache'
         },
         count: 2,
@@ -29,5 +29,5 @@ it('render result after submit the form', async () => {
     render(<Results data={data} />);
     const items = screen.getByTestId('result');
 
-    expect(items).toHaveTextContent('"Headers": { "cache-control": "string no-cache" }, "count": 2, "results": [ { "name": "fake thing 1", "url": "http://fakethings.com/1" }, { "name": "fake thing 2", "url": "http://fakethings.com/2" } ]');
+    expect(items).toHaveTextContent('"count : "2"headers : "{ "cache-control": "string no-cache" }"results : "[ { "name": "fake thing 1", "url": "http://fakethings.com/1" }, { "name": "fake thing 2", "url": "http://fakethings.com/2" } ]');
 })

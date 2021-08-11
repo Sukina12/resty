@@ -8,39 +8,56 @@ function Form(props) {
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
   const [showText, setShowText] = useState(false);
   const [inputText, setInputText] = useState({});
+  const [memory, setMemory] = useState(
+    JSON.parse(localStorage.getItem('memory')) || []
+  );
+  const saveMemoryData = async (data) =>{
+    setMemory ([...memory,data]);
+    await localStorage.setItem('memory',JSON.stringify(memory));
+  };
+  console.log('memory',memory);
   async function handleSubmit(e) {
     e.preventDefault();
+
     try {
       console.log('input', inputText);
+      props.handleLoad(true);
       const  response= await axios({
         method: method,
         url: url,
+        data:{},
       });
       // const data = await raw.json();
       const formData = {
         method: method,
         url: url,
       };
-      console.log('Data', response);
-      console.log('formData', formData);
-      console.log('url', url);
-      props.handleApiCall(formData,inputText ,response.data);
-      setShowText(false)
+      props.handleApiCall(response.headers ,response.data,formData);
+      props.handleLoad(false);
+      if (!localStorage.getItem('memory')){
+        setMemory([formData]);
+        localStorage.setItem('memory',JSON.stringify(formData));
+      }
+      saveMemoryData(formData);
+      setShowText(false);
+      // props.handleLoad(true);
     } catch (e) {
       console.error(e);
+      props.handleLoad(true);
     }
   }
-  function handeleText(e) {
+  async function handeleText(e) {
     setShowText(true);
-    setMethod(e.target.id);
+    await setMethod(e.target.id);
+    console.log('eTarget',e.target.id);
   
   }
   function handeleInputText(e) {
     setInputText(e.target.value);
   }
-  function handelMethod(e) {
-    setMethod(e.target.id);
-  
+  async function handelMethod(e) {
+    await setMethod(e.target.id);
+    console.log('eTarget',e.target.id);
   }
 
   if (method === 'get' || method === 'delete' ){
