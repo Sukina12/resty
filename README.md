@@ -18,10 +18,10 @@
 [pullRequest](https://github.com/Sukina12/resty/pull/1)
 
 #### Lab27:
-[pullrequest2](https://github.com/Sukina12/resty/pull/3)
+[pullrequest2](https://github.com/Sukina12/resty/pull/4)
 
 ### Deployment:
-[MyURL](https://resty-sukina.netlify.app/)
+[MyURL](https://react-app-sukina.netlify.app/)
 
 
 ### To Run App:
