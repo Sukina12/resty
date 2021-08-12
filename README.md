@@ -24,7 +24,7 @@
 [pullRequest3](https://github.com/Sukina12/resty/pull/5)
 
 ### Deployment:
-[MyURL](https://react-app-sukina.netlify.app/)
+[MyURL](https://react-app-resty.netlify.app/)
 
 
 ### To Run App:
