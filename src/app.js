@@ -53,10 +53,10 @@ function App () {
        setData(data);
        setLoad(false);
       }else {
+        dispatch(addAction(requestParams));
         const data = await axios[requestParams.method](requestParams.url);
         setData(data);
         setLoad(false);
-        dispatch(addAction(requestParams));
       }
     }
   },[requestParams]);
