@@ -11,50 +11,63 @@ import Results from './components/results/Results';
 import MethodList from './components/MethodList/MethodList';
 // import { useState } from 'react';
 import { BeatLoader } from 'react-spinners';
-
-class App extends React.Component {
-  constructor (props){
-    super (props);
-    this.state = {
-      data:null,
-      requestParams:{},
-      load:true,
-      headers:null,
-      count:'',
+import { useEffect, useReducer, useState } from 'react';
+import axios from 'axios';
+function App () {
+  const [data, setData] = useState(null);
+  const [requestParams, setRequestParams] = useState({});
+  const [requestBody, setRequestBody] = useState({});
+  const [load, setLoad] = useState(false)
+  useEffect (async ()=>{
+    if(requestParams.url){
+      if(requestBody){
+        const data = await axios[requestParams.method](requestParams.url, JSON.parse(requestBody));
+        console.log('The data',data);
+       setData(data);
+       setLoad(false);
+      }else {
+        const data = await axios[requestParams.method](requestParams.url);
+        setData(data);
+        setLoad(false);
+      }
     }
-  }
+  },[requestParams]);
  
-  callApi=(headers,results,formData)=>  {
-    console.log('formData',formData);
-    this.setState ({
-      data:results,
-      headers:headers,
-      count:results.count,
-      requestParams:formData,
-    })
-    console.log('data after set',this.state.requestParams);
+  async function callApi(formData,requestBody){
+    setLoad(true);
+    if(formData.url){
+      setRequestParams(formData);
+      setRequestBody(requestBody);
+    }else {
+      const data = {
+        count: 2,
+        method: formData.method,
+        results: [
+          { name: 'fake thing 1', url: 'http://fakethings.com/1' },
+          { name: 'fake thing 2', url: 'http://fakethings.com/2' },
+        ],
+      };
+      setData({data})
+      setRequestParams(formData);
+      setLoad(false);
+      
+    }
+   
   }
 
-   handleLoad=(load)=> {
-    this.setState ({
-      load:load,
-    })
-  }
-  render (){
 
     return (
       <React.Fragment>
         <Header />
-        <div>Request Method: {this.state.requestParams.method}</div>
-          <div>URL: {this.state.requestParams.url}</div>
-        <Form handleLoad={this.handleLoad} handleApiCall={this.callApi} />
-        {!this.state.load &&
-         <MethodList handleLoad={this.handleLoad} handleApiCall={this.callApi} />}
-        {this.state.load ? <BeatLoader load /> :  <Results data ={{results:this.state.data,count : this.state.count, headers:this.state.headers}} />}
+        <div>Request Method: {requestParams.method}</div>
+          <div>URL: {requestParams.url}</div>
+        <Form handleApiCall={callApi} />
+         {/* <MethodList  /> */}
+        {load ? <BeatLoader load /> : data && <Results data ={data} />}
         <Footer />
       </React.Fragment>
     );
-  }
+  
 
 }
 
