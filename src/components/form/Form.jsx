@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import "./form.scss";
-import MethodList from "../MethodList/MethodList";
+import MethodList from "../MethodList/History";
 
 function Form(props) {
   const [method, setMethod] = useState("get");
@@ -31,11 +31,6 @@ function Form(props) {
     if (method === "post" || method === "put") {
       props.handleApiCall(formData, body);
     }
-    if (!localStorage.getItem("memory")) {
-      setMemory([formData]);
-      localStorage.setItem("memory", JSON.stringify(formData));
-    }
-    saveMemoryData(formData);
   }
 
   function handelMethod(e) {
