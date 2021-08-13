@@ -15,22 +15,6 @@ function Results(props) {
 
   return (
     <>
-      <section className="List">
-        <h2>MethodsMemory :</h2>
-        {methodsData.map((item, idx) => (
-          <div>
-            <button
-              className={item.method}
-              key={idx}
-              // onClick={fetch}
-              // ref={node => (inputNode = node)}
-            >
-              {item.method}
-            </button>
-            <p>{item.url}</p>
-          </div>
-        ))}
-      </section>
       <section>
         <h3>Count</h3>
         <JSONPretty

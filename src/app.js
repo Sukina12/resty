@@ -8,19 +8,46 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Form from './components/form/Form';
 import Results from './components/results/Results';
-import MethodList from './components/MethodList/MethodList';
+
 // import { useState } from 'react';
 import { BeatLoader } from 'react-spinners';
-import { useEffect, useReducer, useState } from 'react';
+import {  useState, useEffect, useReducer } from 'react';
+// import { initialState, historyReducer, addAction} from './reducer/Reducer';
+import History from './components/MethodList/History';
 import axios from 'axios';
+const initialState = {
+  history:[],
+};
 function App () {
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
   const [requestBody, setRequestBody] = useState({});
-  const [load, setLoad] = useState(false)
+  const [state,dispatch ] = useReducer(historyReducer,initialState);
+  const [load, setLoad] = useState(false);
+
+  
+  function historyReducer (state=initialState, action){
+    const {type, payload} = action;
+    switch (type) {
+      case 'ADD-TO-HISTORY':
+        const history = [...state.history , payload.history];
+        return {history};
+      default :
+        return state;
+    }
+  }
+  
+  function addAction (history){
+    return {
+      type : 'ADD-TO-HISTORY',
+      payload : {history},
+    };
+  }
   useEffect (async ()=>{
     if(requestParams.url){
       if(requestBody){
+        dispatch(addAction(requestParams));
+        console.log('requestParams',requestParams);
         const data = await axios[requestParams.method](requestParams.url, JSON.parse(requestBody));
         console.log('The data',data);
        setData(data);
@@ -29,6 +56,7 @@ function App () {
         const data = await axios[requestParams.method](requestParams.url);
         setData(data);
         setLoad(false);
+        dispatch(addAction(requestParams));
       }
     }
   },[requestParams]);
@@ -50,6 +78,7 @@ function App () {
       setData({data})
       setRequestParams(formData);
       setLoad(false);
+      dispatch(addAction(formData));
       
     }
    
@@ -62,7 +91,7 @@ function App () {
         <div>Request Method: {requestParams.method}</div>
           <div>URL: {requestParams.url}</div>
         <Form handleApiCall={callApi} />
-         {/* <MethodList  /> */}
+        {state.history.length ? <History history={state.history} /> : null}
         {load ? <BeatLoader load /> : data && <Results data ={data} />}
         <Footer />
       </React.Fragment>
